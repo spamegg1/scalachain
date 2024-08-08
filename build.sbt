@@ -2,22 +2,22 @@ name := "scalachain"
 
 version := "0.1"
 
-scalaVersion := "2.12.4"
+scalaVersion := "2.13.14"
 
 resolvers ++= Seq(
-  "Typesafe Repository" at "http://repo.typesafe.com/typesafe/releases/",
-  "dnvriend" at "http://dl.bintray.com/dnvriend/maven",
+  "Typesafe Repository" at "https://repo.typesafe.com/typesafe/releases/",
+  "dnvriend" at "https://dl.bintray.com/dnvriend/maven",
   Resolver.jcenterRepo
 )
 
-lazy val akkaVersion = "2.5.21"
-lazy val akkaHttpVersion = "10.1.7"
-lazy val akkaPersistenceInmemoryVersion = "2.5.15.1"
-lazy val scalaTestVersion = "3.0.5"
+lazy val akkaVersion = "2.5.23"
+lazy val akkaHttpVersion = "10.1.10"
+lazy val akkaPersistenceInmemoryVersion = "2.5.15.2"
+lazy val scalaTestVersion = "3.0.8"
 
 libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-testkit" % akkaVersion % Test,
-  "org.scalatest" %% "scalatest" % "3.0.5" % "test",
+  "org.scalatest" %% "scalatest" % scalaTestVersion % "test",
   "com.typesafe.akka" %% "akka-persistence" % akkaVersion,
   "org.iq80.leveldb" % "leveldb" % "0.10",
   "org.fusesource.leveldbjni" % "leveldbjni-all" % "1.8",
@@ -30,4 +30,4 @@ libraryDependencies ++= Seq(
   "com.github.dnvriend" %% "akka-persistence-inmemory" % akkaPersistenceInmemoryVersion
 )
 
-fork in Test := true
+Test / fork := true

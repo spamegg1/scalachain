@@ -8,6 +8,7 @@ import org.scalatest.{BeforeAndAfterAll, FlatSpecLike, Matchers}
 
 import scala.concurrent.Future
 import scala.concurrent.duration._
+import scala.language.postfixOps
 
 class MinerTest(sys: ActorSystem) extends TestKit(sys)
   with ImplicitSender
@@ -17,7 +18,7 @@ class MinerTest(sys: ActorSystem) extends TestKit(sys)
 
   def this() = this(ActorSystem("miner-test"))
 
-  override def afterAll: Unit = {
+  override def afterAll(): Unit = {
     shutdown(system)
   }
 
@@ -27,7 +28,7 @@ class MinerTest(sys: ActorSystem) extends TestKit(sys)
     miner ! Ready
     miner ! Ready
 
-    expectMsg(500 millis, Success("OK"))
+    expectMsg(500.millis, Success("OK"))
   }
 
   "A Miner Actor" should "be busy while mining a new block" in {
@@ -36,7 +37,7 @@ class MinerTest(sys: ActorSystem) extends TestKit(sys)
     miner ! Ready
     miner ! Mine("1")
 
-    expectMsgClass(500 millis, classOf[Future[Long]])
+    expectMsgClass(500.millis, classOf[Future[Long]])
 
     miner ! Mine("2")
 

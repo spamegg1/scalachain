@@ -16,7 +16,7 @@ class BlockchainTest(sys: ActorSystem) extends TestKit(sys)
 
   def this() = this(ActorSystem("blockchain-test"))
 
-  override def afterAll: Unit = {
+  override def afterAll(): Unit = {
     shutdown(system)
   }
 
@@ -24,22 +24,22 @@ class BlockchainTest(sys: ActorSystem) extends TestKit(sys)
     val blockchain = system.actorOf(Blockchain.props(EmptyChain, "test"))
 
     blockchain ! GetChain
-    expectMsg(1000 millis, EmptyChain)
+    expectMsg(1000.millis, EmptyChain)
 
     blockchain ! GetLastIndex
-    expectMsg(1000 millis, 0)
+    expectMsg(1000.millis, 0)
 
     blockchain ! GetLastHash
-    expectMsg(1000 millis, "1")
+    expectMsg(1000.millis, "1")
 
 
     val transactions = List(Transaction("a", "b", 1L))
     val proof = 1L
     blockchain ! AddBlockCommand(transactions, proof, System.currentTimeMillis())
-    expectMsg(1000 millis, 1)
+    expectMsg(1000.millis, 1)
 
     blockchain ! GetLastIndex
-    expectMsg(1000 millis, 1)
+    expectMsg(1000.millis, 1)
 
     blockchain ! GetChain
     expectMsgType[ChainLink]
@@ -50,7 +50,7 @@ class BlockchainTest(sys: ActorSystem) extends TestKit(sys)
     val blockchain = system.actorOf(Blockchain.props(EmptyChain, "test"))
 
     blockchain ! GetLastIndex
-    expectMsg(1000 millis, 1)
+    expectMsg(1000.millis, 1)
 
     blockchain ! GetChain
     val ack = expectMsgType[ChainLink]

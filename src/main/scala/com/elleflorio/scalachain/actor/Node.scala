@@ -47,7 +47,7 @@ object Node {
 
 class Node(nodeId: String, mediator: ActorRef) extends Actor with ActorLogging {
 
-  implicit lazy val timeout = Timeout(5.seconds)
+  implicit lazy val timeout: Timeout = Timeout(5.seconds)
 
   mediator ! Subscribe("newBlock", self)
   mediator ! Subscribe("transaction", self)

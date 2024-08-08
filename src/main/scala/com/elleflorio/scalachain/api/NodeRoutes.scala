@@ -22,7 +22,7 @@ trait NodeRoutes extends SprayJsonSupport {
   def node: ActorRef
   def clusterManager: ActorRef
 
-  implicit lazy val timeout = Timeout(5.seconds)
+  implicit lazy val timeout: Timeout = Timeout(5.seconds)
 
   lazy val statusRoutes: Route = pathPrefix("status") {
     concat(

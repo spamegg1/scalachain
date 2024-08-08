@@ -18,7 +18,7 @@ class BrokerTest(sys: ActorSystem) extends TestKit(sys)
   def this() = this(ActorSystem("broker-test"))
   val mediator: ActorRef = DistributedPubSub(this.system).mediator
 
-  override def afterAll: Unit = {
+  override def afterAll(): Unit = {
     shutdown(system)
   }
 
@@ -26,7 +26,7 @@ class BrokerTest(sys: ActorSystem) extends TestKit(sys)
     val broker = system.actorOf(Broker.props)
 
     broker ! GetTransactions
-    expectMsg(500 millis, List())
+    expectMsg(500.millis, List())
   }
 
   "A Broker Actor" should "return the correct list of added transactions" in {
@@ -38,7 +38,7 @@ class BrokerTest(sys: ActorSystem) extends TestKit(sys)
     broker ! AddTransaction(transaction2)
 
     broker ! GetTransactions
-    expectMsg(500 millis, List(transaction2, transaction1))
+    expectMsg(500.millis, List(transaction2, transaction1))
   }
 
   "A Broker Actor" should "clear the transaction lists when requested" in {
@@ -52,7 +52,7 @@ class BrokerTest(sys: ActorSystem) extends TestKit(sys)
     broker ! Clear
 
     broker ! GetTransactions
-    expectMsg(500 millis, List())
+    expectMsg(500.millis, List())
   }
 
 }

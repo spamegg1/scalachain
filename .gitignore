@@ -5,3 +5,9 @@ target/
 persistence/journal/*
 persistence/snapshots/*
 .DS_Store
+.bsp/
+.bloop/
+.metals/
+.vscode/
+project/metals.sbt
+project/project/metals.sbt
